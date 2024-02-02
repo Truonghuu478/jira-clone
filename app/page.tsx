@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import { JiraApp } from '@/templatess'
 
 export default function Home() {
   return (
-   <main>
+   <JiraApp>
     hello
-    </main>
+    </JiraApp>
   )
 }
