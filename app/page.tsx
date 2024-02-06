@@ -1,9 +1,8 @@
-import { JiraApp } from '@/templatess'
-
+"use client"
 export default function Home() {
   return (
-   <JiraApp>
-    hello
-    </JiraApp>
+   <div>
+    Home
+    </div>
   )
 }
