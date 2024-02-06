@@ -6,7 +6,9 @@ interface IPage<props>{
 }
  const DetailPage:NextPage<any> = ()=> {
   return (
-    <div>detaiD</div>
+    <div>
+      
+    </div>
   )
 }
 
