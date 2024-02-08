@@ -5,6 +5,7 @@ import Head from 'next/head'
 // import { ThemeProvider } from '@emotion/react'
 // import { theme } from '@/configs'
 // import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import logo from "@/components/icons/logo.svg"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <Head>
        <title>{metadata.title as string}</title>
+       <link rel="icon" href={logo} />
         <meta name="description" content={metadata.description as string} />
         {/* Các meta khác */}
       </Head>
