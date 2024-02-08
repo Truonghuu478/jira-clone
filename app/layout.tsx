@@ -2,9 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
-// import { ThemeProvider } from '@emotion/react'
-// import { theme } from '@/configs'
-// import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import logo from "@/components/icons/logo.svg"
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,11 +25,6 @@ export default function RootLayout({
         {/* Các meta khác */}
       </Head>
       <body className={inter.className}>
-        {/* <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider> */}
           {children}
       </body>
     </html>
