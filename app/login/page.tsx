@@ -20,7 +20,7 @@ const LoginPage: NextPage<any> = () => {
             </div>
           </div>
           <button type='submit' className='text-white bg-blue-600 rounded-sm w-full py-2'>
-            Tiếp tục
+            Đăng nhập
           </button>
           {/* login by other means  */}
           <div className="text-center">

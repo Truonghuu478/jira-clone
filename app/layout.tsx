@@ -24,7 +24,7 @@ export default function RootLayout({
         <meta name="description" content={metadata.description as string} />
         {/* Các meta khác */}
       </Head>
-      <body className={inter.className}>
+      <body className={`${inter.className} px-3 py-4`}>
           {children}
       </body>
     </html>
