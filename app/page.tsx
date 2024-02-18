@@ -1,6 +1,7 @@
 "use client"
 
 import { Pagination } from "@/components"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -35,7 +36,11 @@ export default function Home() {
               <td>
                 1
               </td>
-              <td>Internal accounting</td>
+              <td>
+                <Link href={`/projects/123`}>
+                Internal accounting
+                </Link>
+              </td>
               <td>Website</td>
               <td>1233</td>
               <td>Truong</td>
