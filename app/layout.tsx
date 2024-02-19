@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
-import logo from "@/components/icons/logo.svg"
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,11 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <Head>
        <title>{metadata.title as string}</title>
-       <link rel="icon" href={logo} />
+       <link rel="icon" href={""} />
         <meta name="description" content={metadata.description as string} />
         {/* Các meta khác */}
       </Head>
-      <body className={`${inter.className} px-3 py-4`}>
+      <body className={`${inter.className}`}>
           {children}
       </body>
     </html>

@@ -1,4 +1,4 @@
-import { FacebookLogo, IconLogo } from '@/components'
+import { FacebookLogo, LogoIcon } from '@/components'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -8,7 +8,7 @@ const LoginPage: NextPage<any> = () => {
       <div style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 10px' }} className="w-[400px] bg-white rounded-sm text-[#5E6C84] px-10 py-10">
         <form  className="">
           <div className='flex justify-center items-center p-2'>
-            <IconLogo />
+            <LogoIcon />
           </div>
           <div className="pt-6 ">
             <h5 className='text-[#172B4D] text-center font-semibold pb-3'>Đăng nhập để tiếp tục</h5>
