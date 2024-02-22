@@ -17,7 +17,13 @@ const config: Config = {
       width:{
       },
       colors:{
-        primary_700:"#2684ff"
+        primary_700:"#2684ff",
+        secondary_700:"#01b46e",
+        btn_reset:'#e0e0e0',
+        btn_reset_hover:"#d5d5d5"
+      },
+      backgroundColor:{
+        btn_avatar : 'rgba(0, 0, 0, 0.04)'
       }
     },
   },
