@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  outline: none;
+}
+
 body {
   color: rgba(0, 0, 0, 0.87);
   margin: 0;
