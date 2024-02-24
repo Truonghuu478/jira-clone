@@ -31,7 +31,7 @@ export default function Tabs({ children }:IProps) {
             <Tab.Group >
                 <Tab.List >
                     {CONTENT.map((tab: IProjectCategory) => (
-                        <Tab className={classNames('px-2 border-b-2 border-b-transparent',{' border-b-primary_700 transition-all': tabActive === tab.id})} onClick={() => onChangeTab(tab.id)} key={tab.id} value={tab.id}>
+                        <Tab className={classNames('px-2 border-b-2 transition-all',{' border-b-primary_700 ': tabActive === tab.id,'border-b-transparent':tabActive !== tab.id})} onClick={() => onChangeTab(tab.id)} key={tab.id} value={tab.id}>
                             <span className={"px-2 py-1 inline-block"}>
                                 {tab.projectCategoryName}
                             </span>

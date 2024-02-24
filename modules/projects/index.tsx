@@ -11,7 +11,7 @@ interface IProps {
   dataTable: Array<IProject>
 }
 
-export default function ProjectTabs({ dataTable }: IProps) {
+export default function TabsProject({ dataTable }: IProps) {
   const router = useRouter()
   const params = useSearchParams();
   const pathname = usePathname();
@@ -47,7 +47,7 @@ export default function ProjectTabs({ dataTable }: IProps) {
                   1
                 </td>
                 <td className="table-col">
-                  <Link href={`/projects/123`}>
+                  <Link href={`/project/123`} className='text-primary_700'>
                     Internal accounting
                   </Link>
                 </td>
