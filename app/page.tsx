@@ -1,9 +1,13 @@
 
-import { CLientLayout, Card, DelIcon, EditIcon, Pagination } from "@/components"
+
+import { CLientLayout, Card } from "@/components"
 import { LinkPage } from "@/constants"
+import { ProjectsTab } from "@/modules"
+import ProjectsFilter from "@/modules/projects/filter"
 import Link from "next/link"
 
 export default function Home() {
+
 
   return (
     <CLientLayout>
@@ -27,91 +31,13 @@ export default function Home() {
             </div>
           </div>
           {/* filter  */}
-          <form className="p-3">
-            <div className="grid grid-cols-6 gap-4">
-              <div className="w-full">
-                <label className="mb-2 block font-bold">
-                  Tên dư án
-                </label>
-                <input className="block p-2 border rounded w-full" type="string" value="" placeholder="Nhập tên dự án" />
-              </div>
-              <div className="">
-                <label className="mb-2 block font-bold">
-                  Tên danh mục
-                </label>
-                <input className="block p-2 border rounded w-full" type="string" value="" placeholder="Nhập tên danh mục" />
-              </div>
-            </div>
-            <div className="flex justify-end items-center">
-              <button className="mr-3 bg-btn_reset hover:bg-btn_reset_hover py-[6px] px-[16px] rounded min-w-[64px]">
-                Làm mới
-              </button>
-              <button type="submit" className="bg-blue-500 hover:bg-blue-700 py-[6px] px-[16px] rounded min-w-[64px] text-white">
-                Áp dụng
-              </button>
-            </div>
-          </form>
+          <ProjectsFilter/>
 
         </Card>
         <Card className="">
-          {/* list project  */}
-          <div className="grid p-4">
-            
-          <table className="table table-auto hover:table-fixed">
-              <thead >
-                <tr className="bg-[#e5e5e5]  table-row align-middle">
-                  <td className="table-col font-bold">STT</td>
-                  <td className="table-col font-bold">Tên dự án</td>
-                  <td className="table-col font-bold">Tên danh mục</td>
-                  <td className="table-col font-bold">Bí danh</td>
-                  <td className="table-col font-bold">Người tạo</td>
-                  <td className="table-col font-bold">Thành viên</td>
-                  <td className="table-col font-bold">Mô tả</td>
-                  <td className="table-col font-bold">Thao tác</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="table-col">
-                    1
-                  </td>
-                  <td className="table-col">
-                    <Link href={`/projects/123`}>
-                      Internal accounting
-                    </Link>
-                  </td>
-                  <td className="table-col">Website</td>
-                  <td className="table-col">1233</td>
-                  <td className="table-col">Truong</td>
-                  <td className="table-col">
-                    <ul>
-                      <li>
-                        truong
-                      </li>
-                      <li>
-                        vy
-                      </li>
-                    </ul>
-                  </td>
-                  <td className="table-col">mo ta ....</td>
-                  <td className="table-col">
-                    <div className="flex items-center">
-                      <button className="border hover:bg-slate-300 font-bold py-2 px-4 rounded ">
-                        <DelIcon className="w-4 text-white" />
-                      </button>
-                      <button className="border hover:bg-slate-300 font-bold py-2 px-4 rounded ml-2">
-                        <EditIcon className="w-4 text-white" />
-                      </button>
-                    </div>
-                  </td>
+          <ProjectsTab
+            dataTable={[]} />
 
-                </tr>
-
-
-              </tbody>
-            </table>
-            <Pagination className={"col-span-3"} />
-          </div>
         </Card>
       </div>
 
@@ -120,3 +46,4 @@ export default function Home() {
 
   )
 }
+

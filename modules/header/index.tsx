@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div className="grid grid-cols-6 gap-4 bg-primary_700 text-white px-7 py-4">
       <div className='col-start-1' >
-        <h2 className='text-3xl'>Jira</h2>
+        <Link href={'/'} className='text-3xl'>Jira</Link>
       </div>
       <nav className='col-start-2 col-span-4 '>
         <ul className='h-full flex justify-center items-center'>

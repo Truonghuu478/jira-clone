@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function ProjectPage() {
   return (
-    <div>ProjectPage 123</div>
+    <div>ProjectPage</div>
   )
 }
