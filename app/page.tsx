@@ -47,17 +47,3 @@ export default function Home() {
   )
 }
 
-
-const getServerSideProps = (async (ctx: any) => {
-  const props: any = {}
-  props.projects = []
-
-
-  const slug = ctx.params
-  console.log('getServerSideProps', slug);
-
-  return {
-    props
-  }
-}
-)

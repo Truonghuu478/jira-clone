@@ -13,20 +13,9 @@ const nextConfig = {
     ],
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'img.icons8.com',
-        pathname: '/',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port:'3000',
-        pathname: '/',
-      }
-    ],
+    domains: ['movie-tisket.atlassian.net'],
   },
+
   // env: {
 	// 	BASE_API_URL: NEXT_PUBLIC_API_HOST,
 	// },

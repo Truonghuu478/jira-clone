@@ -17,6 +17,7 @@ const config: Config = {
       width:{
       },
       colors:{
+        primary_200:"#e7f9ff",
         primary_700:"#2684ff",
         secondary_700:"#01b46e",
         btn_reset:'#e0e0e0',
