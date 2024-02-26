@@ -12,6 +12,7 @@ export const CardHeader = ()=>{
         </div>
     )
 }
+
 export function Card({children,className}:ICard) {
   return (
     <div className= {classNames("p-4 overflow-hidden",className)}>
