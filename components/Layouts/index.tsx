@@ -10,9 +10,9 @@ import { Header } from "@/modules"
 const CLientLayout = ({ children }: ILayout) => {
     const router = useRouter()
 
-    // useEffect(()=>{
-    //     router.push("/login",{scroll:true})
-    // },[])
+    useEffect(()=>{
+        router.push("/login",{scroll:true})
+    },[])
 
     return (
         <div>
