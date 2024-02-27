@@ -2,6 +2,9 @@
 
 const {NEXT_PUBLIC_IMAGES_DOMAINS,NEXT_PUBLIC_API_HOST} = process.env;
 const nextConfig = {
+  env: {
+    NEXTAUTH_URL: 'http://localhost:3000' // Thay đổi URL của ứng dụng của bạn tại đây
+  },
   i18n: {
     locales: ['en-US', 'fr', 'nl-NL'],
     defaultLocale: 'en-US',

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const http = axios.create({
+export const http = axios.create({
     baseURL:process.env.NEXT_PUBLIC_API_HOST,
     timeout:1000,
 
@@ -22,6 +22,7 @@ http.interceptors.response.use((configs)=>{
     return error
 })
 
-http.defaults.headers.common["TokenCybersoft"] = process.env.NEXT_PUBLIC_TOKEN_CYBERSOFT 
+http.defaults.headers.common["TokenCybersoft"] = process.env.NEXT_PUBLIC_TOKEN_CYBERSOFT
 
-
+ 
+export {default as UserServices} from "./user"

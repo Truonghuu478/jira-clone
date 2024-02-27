@@ -1,18 +1,19 @@
 "use client"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { ILayout } from "@/models"
 import { useRouter } from "next/navigation"
-import dynamic from "next/dynamic"
 import { Header } from "@/modules"
-// const Header = dynamic(() => import('@/modules/header'), { ssr: false })
+import { LoadingContext } from "@/contexts/loading"
 
 
 const CLientLayout = ({ children }: ILayout) => {
     const router = useRouter()
+    const data = useContext(LoadingContext);
 
-    useEffect(()=>{
-        router.push("/login",{scroll:true})
-    },[])
+    useEffect(() => {
+        console.log('data', data);
+        // router.push("/login",{scroll:true})
+    }, [])
 
     return (
         <div>

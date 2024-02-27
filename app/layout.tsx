@@ -2,6 +2,11 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
+import { LoadingProvider } from '@/contexts'
+import { useContext } from 'react'
+import { LoadingContext } from '@/contexts/loading'
+import { SessionProvider } from 'next-auth/react'
+import { Toaster } from 'react-hot-toast'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,6 +21,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
       <Head>
@@ -28,7 +34,12 @@ export default function RootLayout({
         {/* Các meta khác */}
       </Head>
       <body className={`${inter.className}`}>
-        {children}
+        <LoadingProvider>
+          <SessionProvider>
+          {children}
+          </SessionProvider>
+          <Toaster />
+        </LoadingProvider>
       </body>
     </html>
   )

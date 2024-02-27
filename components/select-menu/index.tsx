@@ -6,9 +6,11 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 import { AvatarIcon } from '..'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
 
  const Select:any = ()=> {
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -45,6 +47,7 @@ import Link from 'next/link'
             <Menu.Item>
               {({ active }) => (
                 <button
+                onClick={()=> signOut()}
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900 ' : 'text-gray-700',
                     'block px-4 py-2 text-sm w-full text-left'

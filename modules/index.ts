@@ -7,6 +7,7 @@ export {default as ProjectsTab} from "./projects"
 
 export {default as ProfilePage} from "./profile"
 export {default as ProjectDetail} from "./project-detail"
+export {default as LoginForm} from "./login"
 
 
 
