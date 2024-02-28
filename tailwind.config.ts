@@ -24,7 +24,8 @@ const config: Config = {
         btn_reset_hover:"#d5d5d5"
       },
       backgroundColor:{
-        btn_avatar : 'rgba(0, 0, 0, 0.04)'
+        btn_avatar : 'rgba(0, 0, 0, 0.04)',
+        loading : 'rgba(44, 44, 45,0.3)'
       },
       boxShadow:{
         default :'0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',

@@ -7,7 +7,10 @@ export interface ILoadingContext {
     setIsLoading: (status: boolean) => void
 }
 
-export const LoadingContext = createContext<ILoadingContext>()
+export const LoadingContext = createContext<ILoadingContext>({
+    isLoading:false,
+    setIsLoading : ()=>{}
+})
 
 interface IProps {
     children: ReactNode

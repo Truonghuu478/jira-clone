@@ -1,19 +1,19 @@
-import { ILoginUser } from '@/models/user';
+import { ILoginUser, UserLoginResp } from '@/models/user';
 import { http } from '.';
+import { HTTPResponse } from '@/models';
 
 
 
+ export const signInAPI =  async (data: ILoginUser) => {
+  try {
+    const resp:HTTPResponse<UserLoginResp> = await http.post('api/Users/signin', data)
 
-
- const UserServices = ()=>{
-    signIn:async (data:ILoginUser)=>{
-        try {
-            const response = await http.post('api/Users/signin',data);
-            return response.data;
-          } catch (error) {
-            throw new Error('Failed to fetch posts');
-          }
+    if(resp && resp.content){
+      return resp.content
     }
-}
 
-export default UserServices
+  } catch (error:any) {
+    throw new Error(error.response?.data?.message || 'Đã có lỗi xảy ra khi đăng nhập');
+  }
+};
+

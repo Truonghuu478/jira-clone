@@ -3,10 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
 import { LoadingProvider } from '@/contexts'
-import { useContext } from 'react'
-import { LoadingContext } from '@/contexts/loading'
-import { SessionProvider } from 'next-auth/react'
 import { Toaster } from 'react-hot-toast'
+// import { SessionProvider, getSession } from 'next-auth/react'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,11 +14,15 @@ export const metadata: Metadata = {
   description: 'A Jira-like application for project management',
 }
 
-export default function RootLayout({
+interface IProps{
+  children: React.ReactNode,
+  session:any
+}
+
+ function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+  session
+}: IProps) {
 
   return (
     <html lang="en">
@@ -34,13 +36,24 @@ export default function RootLayout({
         {/* Các meta khác */}
       </Head>
       <body className={`${inter.className}`}>
-        <LoadingProvider>
-          <SessionProvider>
-          {children}
-          </SessionProvider>
-          <Toaster />
-        </LoadingProvider>
+      {/* <SessionProvider session={session}> */}
+          <LoadingProvider>
+            {children}
+            <Toaster />
+          </LoadingProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   )
 }
+
+// RootLayout.getInitialProps = async (ctx:any)=>{
+//   const session = await getSession();
+
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
+export default RootLayout

@@ -18,10 +18,9 @@ const nextConfig = {
   images: {
     domains: ['movie-tisket.atlassian.net'],
   },
-
-  // env: {
-	// 	BASE_API_URL: NEXT_PUBLIC_API_HOST,
-	// },
+  nextAuth: {
+    secret: '432dbb939e2252afa6e5d602b68de896235e8170a554e9d3b9b7dfea28095b80',
+  },
 }
 
 module.exports = nextConfig

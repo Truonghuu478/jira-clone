@@ -1,33 +1,31 @@
-// pages/api/auth/[...nextauth].js
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { ILoginUser } from './../../../models/user';
+// pages/api/auth/my-auth-provider.js
+import { signInAPI } from '@/services';
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 
+
 export default NextAuth({
   providers: [
-    Providers.Credentials({
-      // Xác thực thông qua đăng nhập thông thường
-      async authorize(credentials) {
-        // Thực hiện xác thực tại đây (ví dụ: truy vấn cơ sở dữ liệu)
-        if (credentials.username === 'admin' && credentials.password === 'password') {
-          // Nếu xác thực thành công, trả về một đối tượng user
-          return { id: 1, name: 'Admin' }
+    CredentialsProvider({
+      name: 'credentials',
+      credentials: {
+        username: { label: "email", type: "email", placeholder: "jsmith" },
+        password: { label: "password", type: "password" }
+      },
+      async authorize(credentials:any,req) {
+        const userData = await signInAPI(credentials);
+        if (userData) {
+          return userData
         } else {
-          // Nếu xác thực thất bại, trả về null
-          return null
+          return  null;;
         }
       }
     })
   ],
-  callbacks: {
-    async jwt(token, user) {
-      if (user) {
-        token.id = user.id
-      }
-      return token
-    }
-  },
-  secret: 'YOUR_SECRET_KEY', // Thay YOUR_SECRET_KEY bằng một giá trị bí mật thực tế
-  session: {
-    jwt: true,
-  },
-})
+  // secret: '432dbb939e2252afa6e5d602b68de896235e8170a554e9d3b9b7dfea28095b80',
+  // session: {
+  //   jwt: true,
+  // },
+});

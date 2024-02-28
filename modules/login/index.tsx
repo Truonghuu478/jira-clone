@@ -1,27 +1,33 @@
 "use client"
 
 import { FacebookIcon, LogoIcon } from '@/components'
-import { loginUserSchema } from '@/utils';
+import { loginUserSchema, saveSessionToCookie } from '@/utils';
 import Link from 'next/link'
 import React, { useContext } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ILoginUser, LoginUserInput } from '@/models/user';
+import { ILoginUser, LoginUserInput, UserLoginResp } from '@/models/user';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LoadingContext } from '@/contexts/loading';
-import toast  from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { signInAPI } from '@/services';
+import classNames from 'classnames';
+import { decode } from 'punycode';
+import { HTTPResponse } from '@/models';
+import { AxiosResponse } from 'axios';
 
 const defaultValues: ILoginUser = {
-  email: '',
-  password: ''
+  email: 'demo@gmail.com',
+  password: 'string'
 }
-export default function LoginForm() {
+export default function (props: any) {
+
   const router = useRouter()
 
-  const {setIsLoading } = useContext(LoadingContext)
+  const { setIsLoading } = useContext(LoadingContext)
 
-  const { register, handleSubmit, formState: { errors } ,reset,setError} = useForm<LoginUserInput>({
+  const { register, handleSubmit, formState: { errors }, reset, setError } = useForm<LoginUserInput>({
     defaultValues,
     resolver: yupResolver(loginUserSchema),
   })
@@ -29,34 +35,29 @@ export default function LoginForm() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/profile'
 
-  const onSubmit:SubmitHandler<LoginUserInput> = async (values:ILoginUser) => {
-      try {
-        setIsLoading?.(true)
-        const resp = await signIn('credentials', {
-          redirect: false,
-          email: values.email,
-          password: values.password,
-          redirectTo: callbackUrl,
-        })
-        console.log('resp',resp);
-        
-        // if (!resp?.error) {
-        //   toast.success('Đăng nhập thành công');
-        //   router.push(callbackUrl);
-        // } else {
-        //   reset({ password: '' });
-        //   const message = 'email hoặc mật khẩu không đúng';
-        //   toast.error(message);
-        //   // setError(message);
-        // }
-        // setIsLoading?.(false)
+  const onSubmit: SubmitHandler<LoginUserInput> = async (credentials: ILoginUser) => {
+    try {
+      setIsLoading(true)
+      const respData: UserLoginResp = await signInAPI(credentials);
+      console.log(respData);
 
-      } catch (error:any) {
-        toast.error(error.message);
-      // setError(error.message);
-      }finally {
-        setIsLoading(false);
+      if (respData) {
+        toast.success("ĐĂng nhập thành công")
+        saveSessionToCookie(respData.accessToken)
+      }
+      router.replace(callbackUrl)
+
+    } catch ({ message }: any) {
+      setError("email", { message: '' })
+      setError("password", { message: '' })
+      toast.error(message, {
+        position: 'top-right'
+      })
+      setIsLoading(false)
+    }finally{
+      setIsLoading(false)
     }
+
   }
 
   return (
@@ -71,18 +72,18 @@ export default function LoginForm() {
             {...register("email")}
 
             autoFocus
-            className="border rounded-sm p-2 w-full text-sm" id='email'
+            className={classNames("border rounded-sm p-2 w-full text-s", { 'border-red-600': errors?.email })} id='email'
             placeholder='Nhập email của bạn' />
-            {errors?.email && <p className='text-sm text-red-500 pt-1'>{errors.email.message}</p>}
+          {errors?.email && <span className='text-sm text-red-500 '>{errors.email.message}</span>}
         </div>
         <div className="pb-3">
 
           <input
             {...register("password")}
             type="password"
-            className="border rounded-sm p-2 w-full text-sm"
+            className={classNames("border rounded-sm p-2 w-full text-s", { 'border-red-600': errors?.password })}
             placeholder='Nhập mật khẩu...' />
-            {errors?.password && <p className='text-sm text-red-500 pt-1'>{errors.password.message}</p>}
+          {errors?.password && <span className='text-sm text-red-500 '>{errors.password.message}</span>}
         </div>
       </div>
       <button type='submit' className='text-white bg-blue-600 rounded-sm w-full py-2'>
@@ -100,14 +101,14 @@ export default function LoginForm() {
         <p className="text-[#5E6C84] text-sm font-semibold py-3 ">Hoặc tiếp túc với:</p>
         <button className="flex justify-center items-center border w-full rounded-sm border-l-[#C1C7D0] hover:bg-[#ececef] py-1">
           <FacebookIcon />
-          <span className="pl-1 text-[#42526E] font-semibold text-sm">Facebook</span>
+          <span className="pl-1 text-[#42526E] font-semibold text-sm">Google</span>
         </button>
       </div>
       <div className="text-center">
         <p className="text-[#5E6C84] text-sm font-semibold py-3 ">Hoặc tiếp túc với:</p>
         <button className="flex justify-center items-center border w-full rounded-sm border-l-[#C1C7D0] hover:bg-[#ececef] py-1">
           <FacebookIcon />
-          <span className="pl-1 text-[#42526E] font-semibold text-sm">Facebook</span>
+          <span className="pl-1 text-[#42526E] font-semibold text-sm">Github</span>
         </button>
       </div>
     </form>
