@@ -2,20 +2,16 @@
 
 import { FacebookIcon, LogoIcon } from '@/components'
 import { loginUserSchema, saveSessionToCookie } from '@/utils';
-import Link from 'next/link'
 import React, { useContext } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ILoginUser, LoginUserInput, UserLoginResp } from '@/models/user';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LoadingContext } from '@/contexts/loading';
 import toast from 'react-hot-toast';
 import { signInAPI } from '@/services';
 import classNames from 'classnames';
-import { decode } from 'punycode';
-import { HTTPResponse } from '@/models';
-import { AxiosResponse } from 'axios';
+import { TOKEN } from '@/constants';
 
 const defaultValues: ILoginUser = {
   email: 'demo@gmail.com',
@@ -38,13 +34,14 @@ export default function (props: any) {
   const onSubmit: SubmitHandler<LoginUserInput> = async (credentials: ILoginUser) => {
     try {
       setIsLoading(true)
-      const respData: UserLoginResp = await signInAPI(credentials);
-      console.log(respData);
+      const respData = await signInAPI(credentials);
 
       if (respData) {
         toast.success("ĐĂng nhập thành công")
-        saveSessionToCookie(respData.accessToken)
-      }
+        saveSessionToCookie(TOKEN.SESSION_TOKEN,respData.accessToken)
+        saveSessionToCookie("email",respData.email)
+
+      } 
       router.replace(callbackUrl)
 
     } catch ({ message }: any) {

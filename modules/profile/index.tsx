@@ -1,11 +1,12 @@
-'use client'
-import { AvatarIcon } from '@/components'
-import { Tab } from '@headlessui/react'
-import React from 'react'
-import { PhotoIcon, UserCircleIcon, CameraIcon, CircleStackIcon } from '@heroicons/react/24/solid'
-import Image from 'next/image'
 
-export default function ProfilePage() {
+"use client"
+import React from 'react'
+import Image from 'next/image'
+import { CameraIcon, CircleStackIcon, UserCircleIcon } from '@heroicons/react/20/solid';
+
+
+export default async function ProfilePage(props:any) {
+ 
   return (
 
     <div className=" h-auto shadow-default flex">
@@ -115,8 +116,8 @@ export default function ProfilePage() {
 
           <div className="flex justify-center pl-10">
             <div className="relative  w-28 h-28 border shadow-11 rounded-full " >
-              <Image className='absolute top-0 left-0 w-full h-full rounded-full' src='' alt='avatar' onError={(e) => e.target.src = 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=6&m=1223671392&s=170667a&w=0&h=zP3l7WJinOFaGb2i1F4g8IS2ylw0FlIaa6x3tP9sebU='} />
-              <div className="absolute top-[70%] right-[10%]  ">
+              <Image className='absolute top-0 left-0 w-full h-full rounded-full' src='' alt='avatar' onError={(e:any) => e.target.src = 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=6&m=1223671392&s=170667a&w=0&h=zP3l7WJinOFaGb2i1F4g8IS2ylw0FlIaa6x3tP9sebU='} />
+              <div className="absolute top-[70%] right-[10%]">
                 <label htmlFor="avatar-upload" className="shadow-11 w-8 h-8 rounded-full p-1  flex justify-center items-center border bg-[#9b9698] cursor-pointer">
                   <CameraIcon className="w-10" />
                   <input
@@ -135,3 +136,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+

@@ -9,7 +9,8 @@ interface IProps{
   
 export default function ProjectDetailPage(props:any) {
     // const check = generateStaticParams('123')
-    const {params } = props
+  const {params } = props
+  
   return (
     <CLientLayout>
         <ProjectDetail projectId={params.projectId || null}/>
@@ -24,6 +25,8 @@ ProjectDetailPage.getInitialProps = async (ctx:any)=>{
 
     return props
 }
+
+
 
 // export async function generateStaticParams(id:string) {
 //     const res = await fetch(`http://localhost:3000/project/${id}`).then((res) => res.json())

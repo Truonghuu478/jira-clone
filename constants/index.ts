@@ -11,6 +11,10 @@ export const LANGUAGES = [
   { id: 'EN', label: "English", url: 'https://img.icons8.com/?size=48&id=15532&format=png' }
 ]
 
+
+export const TOKEN = {
+  SESSION_TOKEN:'session_token'
+}
 export const CONTENT: Array<IProjectCategory> = [
   {
     "id": 0,

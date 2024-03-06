@@ -1,14 +1,24 @@
+import { TOKEN } from "@/constants";
+import { decodeAndVerifyToken, getCookieValue } from "@/utils";
 import axios, { AxiosResponse } from "axios";
+import test from "node:test";
 
 export const http = axios.create({
     baseURL:process.env.NEXT_PUBLIC_API_HOST,
-    timeout:1000,
+    timeout:3000,
 
 })
 
+
+
 http.interceptors.request.use(
     (config) => {
-      // Thêm logic xử lý trước khi gửi request (nếu cần)
+
+    const assetsToken = getCookieValue(TOKEN.SESSION_TOKEN)
+      
+    if(assetsToken){
+      http.defaults.headers.common["Authorization"] = `Bearer ${assetsToken}`
+    }
       return config;
     },
     (error) => {
@@ -23,6 +33,8 @@ http.interceptors.response.use((configs:AxiosResponse<any>)=>{
 (error)=>{
     return Promise.reject(error);
 })
+
+
 
 http.defaults.headers.common["TokenCybersoft"] = process.env.NEXT_PUBLIC_TOKEN_CYBERSOFT
 

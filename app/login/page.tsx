@@ -4,7 +4,6 @@ import { ILoadingContext, LoadingContext } from '@/contexts/loading';
 import { LoginForm } from '@/modules';
 
 import { NextPage } from 'next'
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useContext } from 'react';
 
@@ -14,7 +13,7 @@ const LoginPage: NextPage<any> = (props:any) => {
   return (
     <>
        <div className="h-screen w-full flex justify-center items-center ">
-        <div style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 10px' }} className="w-[400px] bg-white rounded-sm text-[#5E6C84] px-10 py-10">
+        <div className="w-[400px] bg-white rounded-sm text-[#5E6C84] px-10 py-10">
           <LoginForm />
           <div className="flex justify-end pt-3 text-blue-800 text-sm">
             <ul>

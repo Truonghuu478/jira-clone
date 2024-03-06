@@ -1,4 +1,5 @@
 import  { jwtDecode } from "jwt-decode";
+
 import toast from "react-hot-toast";
 
 // Giải mã token JWT
@@ -31,6 +32,6 @@ export const getCookieValue = (name: string): string | null => {
   return null
 }
 
-export const saveSessionToCookie = (token: string) => {
-    document.cookie = `session_token=${token}; secure; sameSite=strict`;
+export const saveSessionToCookie = (key:string,token: string) => {
+    document.cookie = `${key}=${token}; secure; sameSite=strict`;
   }

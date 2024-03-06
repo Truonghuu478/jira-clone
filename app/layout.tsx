@@ -4,7 +4,6 @@ import './globals.css'
 import Head from 'next/head'
 import { LoadingProvider } from '@/contexts'
 import { Toaster } from 'react-hot-toast'
-// import { SessionProvider, getSession } from 'next-auth/react'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,12 +15,10 @@ export const metadata: Metadata = {
 
 interface IProps{
   children: React.ReactNode,
-  session:any
 }
 
  function RootLayout({
-  children,
-  session
+  children
 }: IProps) {
 
   return (
