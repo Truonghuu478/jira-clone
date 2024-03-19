@@ -8,7 +8,7 @@ export interface ILoadingContext {
 }
 
 export const LoadingContext = createContext<ILoadingContext>({
-    isLoading:false,
+    isLoading:true,
     setIsLoading : ()=>{}
 })
 
@@ -16,7 +16,7 @@ interface IProps {
     children: ReactNode
 }
 const LoadingProvider = (props: IProps) => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { children } = props
 

@@ -1,6 +1,6 @@
 import { ILoginUser, UserLoginResp } from '@/models/user';
 import { http } from '.';
-import { HTTPResponse } from '@/models';
+import { HTTPResponse, IProject } from '@/models';
 
 
 
@@ -17,17 +17,14 @@ import { HTTPResponse } from '@/models';
   }
 }
 
-export const getUsersAPI =  async (params: string) => {
-  return await fetch(`api/Users/getUser?keyword=${params}`)
+export const getUsersAPI =  async (params: string)=> {
   try {
     const resp:HTTPResponse<UserLoginResp> = await http.get(`api/Users/getUser?keyword=${params}`)
 
-    if(resp && resp.content){
-      return resp.content
-    }
+    return resp
 
   } catch (error:any) {
-    throw new Error(error.response?.data?.message || 'Đã có lỗi xảy ra khi lấy dữ liệu');
+    throw new Error(error);
   }
 };
 

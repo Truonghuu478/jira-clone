@@ -14,7 +14,8 @@ export const http = axios.create({
 http.interceptors.request.use(
     (config) => {
 
-    const assetsToken = getCookieValue(TOKEN.SESSION_TOKEN)
+    // const assetsToken = getCookieValue(TOKEN.SESSION_TOKEN)
+    const assetsToken = process.env.NEXT_PUBLIC_TOKEN_DEMO
       
     if(assetsToken){
       http.defaults.headers.common["Authorization"] = `Bearer ${assetsToken}`
@@ -39,3 +40,4 @@ http.interceptors.response.use((configs:AxiosResponse<any>)=>{
 http.defaults.headers.common["TokenCybersoft"] = process.env.NEXT_PUBLIC_TOKEN_CYBERSOFT
 
 export * from "./user"
+export * from "./project"

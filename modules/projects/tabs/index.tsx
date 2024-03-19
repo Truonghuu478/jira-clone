@@ -9,21 +9,21 @@ interface IProps{
 }
 export default function Tabs({ children }:IProps) {
     const [tabActive,setTabActive] = useState<number>(0)
+    const pathname = usePathname()
 
     const router = useRouter()
     const params = useSearchParams();
-    const pathname = usePathname();
-
+    const newParams = new URLSearchParams(params.toString());
 
     const onChangeTab = (id: number) => {
-        const newParams = new URLSearchParams(params.toString());
         if (id) {
             newParams.set('category', String(id));
         }else{
             newParams.delete('category')
         }
+
+        router.push(`/projects?${newParams.toString()}`)
         tabActive !== id && setTabActive(id)
-        router.push(`${pathname}?${newParams.toString()}`);
     }
 
     return (

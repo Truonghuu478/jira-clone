@@ -1,58 +1,82 @@
-import React from 'react'
-interface IPagination { 
-  className:string | undefined
+import { useRouter } from 'next/navigation';
+
+interface PaginationProps {
+  total: number;
+  limit: number;
+  currentPage:number
+  handleChangePage:(page:number)=> void,
+  productTitle: string
 }
-const Pagination = (props:IPagination) =>{
-  const {className} = props
+
+export const FIRST_PAGE = 1
+export const LIMIT = 10
+
+
+const Pagination: React.FC<PaginationProps> = ({ total, limit,currentPage,handleChangePage,productTitle="" }) => {
+  const router = useRouter();
+  const totalPages = Math.ceil(total / limit);
+
+  const handlePrev = () => {
+    const prevPage = currentPage - FIRST_PAGE;
+    if (prevPage >= FIRST_PAGE) {
+      handleChangePage(prevPage);
+    }
+  };
+
+  const handleNext = () => {
+    const nextPage = currentPage + FIRST_PAGE;
+    if (nextPage <= totalPages) {
+      handleChangePage(nextPage);
+    }
+  };
+  const item = currentPage > 1 ? ((currentPage-1) * limit+1) : currentPage
+  const renderPages = () => {
+    const pages = [];
+
+    for (let i = FIRST_PAGE; i <= 10; i++) {
+      // limit 10  
+
+      //demo : prev  FIRST_PAGE 2 3 4 5 next
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handleChangePage(i)}
+          className={`px-3 py-1 rounded-md ${
+            i === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-blue-200'
+          }`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pages;
+  };
+
   return (
-   <div>
-  <div className={`${className || ''} flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6`}>
-    <div className="flex flex-1 justify-between sm:hidden">
-      <a href="#" className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-      <a href="#" className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+    <div className="flex justify-between border-y-2 py-2">
+      <p> Từ <b>{item}</b> đến <b>{limit+item}</b> trong <b>{total}</b> {productTitle}</p>
+
+      <div className="flex space-x-2">
+      <button
+        onClick={handlePrev}
+        disabled={currentPage === FIRST_PAGE}
+        className="px-3 py-1 rounded-md bg-gray-200 text-gray-600"
+      >
+        Prev
+      </button>
+      {renderPages()}
+      <button
+        onClick={handleNext}
+        disabled={currentPage === totalPages}
+        className="px-3 py-1 rounded-md bg-gray-200 text-gray-600"
+      >
+        Next
+      </button>
     </div>
-    <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-      <div>
-        <p className="text-sm text-gray-700">
-          Showing
-          <span className="font-medium">1</span>
-          to
-          <span className="font-medium">10</span>
-          of
-          <span className="font-medium">97</span>
-          results
-        </p>
-      </div>
-      <div>
-        <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-          <a href="#" className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-            <span className="sr-only">Previous</span>
-            <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
-            </svg>
-          </a>
-          {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-          <a href="#" aria-current="page" className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
-          <a href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
-          <a href="#" className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
-          <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
-          <a href="#" className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">8</a>
-          <a href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">9</a>
-          <a href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</a>
-          <a href="#" className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-            <span className="sr-only">Next</span>
-            <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
-            </svg>
-          </a>
-        </nav>
-      </div>
     </div>
-  </div>
-</div>
+    
+  );
+};
 
-  )
-}
-
-
-export default Pagination
+export default Pagination;

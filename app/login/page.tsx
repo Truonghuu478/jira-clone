@@ -5,11 +5,15 @@ import { LoginForm } from '@/modules';
 
 import { NextPage } from 'next'
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const LoginPage: NextPage<any> = (props:any) => {
-  const { isLoading } = useContext<ILoadingContext>(LoadingContext)
-    
+const [isLoading,setIsLoading] = useState<boolean>(true)
+
+useEffect(()=>{
+  setIsLoading(false)
+},[])
+
   return (
     <>
        <div className="h-screen w-full flex justify-center items-center ">

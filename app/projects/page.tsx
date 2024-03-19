@@ -25,14 +25,14 @@ const fetchDataProject =  async (value:string)=>{
   }
 }
 
- async function Home() {
+ async function Projects() {
   const data:IProject[] | null = await fetchDataProject('')
-
+  
   return (
     <CLientLayout>
-      Home
+      <ProjectsPage dataTable={data || null} />
     </CLientLayout>
   )
 }
 
-export default Home
+export default Projects
